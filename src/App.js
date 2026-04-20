@@ -395,15 +395,7 @@ const SpecForm = ({ spec, onChange, onCancel, onSave, allPresses }) => {
 // ─── PRESS SPECS ──────────────────────────────────────────────────────────────
 
 const PressSpecs = () => {
-  const [presses, setPresses] = useState([
-    { id:1, name:"ProAmpac — Cary, IL", manufacturer:"PCMC", type:"Infinity (P2)", profiles:[
-      { ...emptySpec, id:1, profileCode:"APF505", profileName:"APF505_150S_WIC_LSH_XPS_HDPP_0523", orientation:"Reverse", substrate:"White Ink / Clear", lineScreen:"150", active:true, customer:"American Packaging", charC:{...emptySpec.charC,density:"1.80"}, charM:{...emptySpec.charM,density:"1.60"}, charY:{...emptySpec.charY,density:"1.05"}, charK:{...emptySpec.charK,density:"1.75"}, staggerType:"Continuous", staggerDirection:"Down" },
-      { ...emptySpec, id:2, profileCode:"APF505-S", profileName:"APF505_150S_Surface_CLR_LSH_0523", orientation:"Surface", substrate:"Clear", lineScreen:"150", active:true, customer:"Kendall Packaging" },
-    ]},
-    { id:2, name:"Midwest Flexo — Chicago", manufacturer:"W&H", type:"Miraflex II", profiles:[
-      { ...emptySpec, id:3, profileCode:"MWF120", profileName:"MWF120_Film_Surface_LSE_Conventional_0124", orientation:"Surface", substrate:"Clear Film", lineScreen:"120", active:true, customer:"" },
-    ]},
-  ]);
+  const [presses, setPresses] = useState([]);
   const [expanded, setExpanded] = useState(1);
   const [editing, setEditing] = useState(null);
   const [editingPressId, setEditingPressId] = useState(null);
@@ -543,7 +535,7 @@ const DigitalPressCheck = () => {
       <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:20 }}>
         <div>
           <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:26, letterSpacing:-0.5 }}>Digital Press Check</div>
-          <div style={{ fontSize:13, color:C.muted, marginTop:3 }}>Round 1 of 2 · Job FL-2024-039 · Tide Original Scent</div>
+          <div style={{ fontSize:13, color:C.muted, marginTop:3 }}>Upload a press sheet photo and GMG proof to begin</div>
         </div>
         <Badge type="warn">On Press</Badge>
       </div>
@@ -824,9 +816,7 @@ const BrandForm = ({ brand, onChange, onCancel, onSave }) => {
 
 const BrandManagement = () => {
   const [brands, setBrands] = useState([
-    { ...emptyBrand, id:1, brandName:"Kellogg's", primaryContact:"Sarah Lee", status:"active", lastUpdated:"Apr 2024", primaryColors:[{name:"Kellogg Red",pantone:"485 C",cmyk:"0/98/100/0",rgb:"#E8002D"}] },
-    { ...emptyBrand, id:2, brandName:"Tide — P&G", primaryContact:"Mike Torres", status:"review", lastUpdated:"Jan 2024", primaryColors:[{name:"Tide Blue",pantone:"286 C",cmyk:"100/68/0/2",rgb:"#003DA5"}] },
-    { ...emptyBrand, id:3, brandName:"PetSmart", primaryContact:"Jan Williams", status:"pending", lastUpdated:"Feb 2024", primaryColors:[{name:"PetSmart Green",pantone:"363 C",cmyk:"76/6/100/0",rgb:"#47A23F"}] },
+
   ]);
   const [editing, setEditing] = useState(null);
   const statusMap = { active:"pass", review:"warn", pending:"info" };
@@ -940,46 +930,25 @@ const Dashboard = () => (
   <div>
     <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:20 }}>
       <div>
-        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:26, letterSpacing:-0.5 }}>Good morning 👋</div>
-        <div style={{ fontSize:13, color:C.muted, marginTop:3 }}>You have 4 jobs in progress · 2 awaiting brand approval</div>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:26, letterSpacing:-0.5 }}>Welcome to Press Pal 👋</div>
+        <div style={{ fontSize:13, color:C.muted, marginTop:3 }}>Your prepress quality control workspace</div>
       </div>
       <span style={{ fontSize:13, color:C.purple, cursor:"pointer", fontWeight:500 }}>View all jobs →</span>
     </div>
     <div style={{ display:"grid", gridTemplateColumns:"repeat(12,1fr)", gap:14 }}>
-      <div className="fade-up" style={{ gridColumn:"span 3" }}><StatCard label="Active Jobs" value="14" meta="↑ 3 from last week" accent={C.lime}/></div>
-      <div className="fade-up-1" style={{ gridColumn:"span 3" }}><StatCard label="Checks Run" value="87" meta="This month"/></div>
-      <div className="fade-up-2" style={{ gridColumn:"span 3" }}><StatCard label="Pending Approval" value="2" meta="Brand reviews needed" style={{ background:C.violet, borderColor:C.violet }} valueColor="white"/></div>
-      <div className="fade-up-3" style={{ gridColumn:"span 3" }}><StatCard label="Pass Rate" value="78%" meta="First-pass artwork" valueColor={C.green}><div style={{ height:6, background:C.surface2, borderRadius:3, overflow:"hidden", marginTop:8 }}><div style={{ height:"100%", width:"78%", background:C.lime, borderRadius:3 }}/></div></StatCard></div>
+      <div className="fade-up" style={{ gridColumn:"span 3" }}><StatCard label="Active Jobs" value="0" meta="No jobs yet" accent={C.lime}/></div>
+      <div className="fade-up-1" style={{ gridColumn:"span 3" }}><StatCard label="Checks Run" value="0" meta="This month"/></div>
+      <div className="fade-up-2" style={{ gridColumn:"span 3" }}><StatCard label="Pending Approval" value="0" meta="Brand reviews needed" style={{ background:C.violet, borderColor:C.violet }} valueColor="white"/></div>
+      <div className="fade-up-3" style={{ gridColumn:"span 3" }}><StatCard label="Pass Rate" value="—" meta="No checks run yet" valueColor={C.green}/></div>
       <div className="fade-up-4" style={{ gridColumn:"span 7", background:C.surface, border:`1px solid ${C.border}`, borderRadius:18, overflow:"hidden" }}>
         <div style={{ padding:"18px 20px 14px", display:"flex", alignItems:"center", justifyContent:"space-between", borderBottom:`1px solid ${C.border}` }}>
           <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:14 }}>Active Jobs</div>
-          <Badge type="info">4 In Progress</Badge>
         </div>
-        <JobRow color={C.lime} name="Kellogg's — Frosted Flakes 12oz" client="FL-2024-038 · Central Package Printing" badge="✓ Pass" badgeType="pass" date="Apr 17"/>
-        <JobRow color={C.amber} name="Tide — Original Scent Pouch" client="FL-2024-039 · Midwest Flexo" badge="⚠ Warn" badgeType="warn" date="Apr 18"/>
-        <JobRow color={C.purple} name="PetSmart — Canine Diet Label" client="FL-2024-040 · Brand Approval Pending" badge="⟳ Review" badgeType="info" date="Apr 18"/>
-        <JobRow color={C.red} name="Snap Kitchen — Sleeve Wrap" client="FL-2024-041 · File Revision Needed" badge="✕ Fail" badgeType="fail" date="Apr 18"/>
+        <div style={{ padding:"32px 20px", textAlign:"center", color:C.muted, fontSize:13 }}>No active jobs yet — click "+ New Job" to get started.</div>
       </div>
       <div className="fade-up-5" style={{ gridColumn:"span 5", background:C.surface, border:`1px solid ${C.border}`, borderRadius:18, padding:20 }}>
         <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:14, marginBottom:16 }}>Check Results</div>
-        <div style={{ display:"flex", alignItems:"center", gap:20 }}>
-          <svg width="80" height="80" viewBox="0 0 80 80" style={{ flexShrink:0 }}>
-            <circle cx="40" cy="40" r="30" fill="none" stroke={C.surface2} strokeWidth="14"/>
-            <circle cx="40" cy="40" r="30" fill="none" stroke={C.green} strokeWidth="14" strokeDasharray="103 85" strokeDashoffset="0" transform="rotate(-90 40 40)"/>
-            <circle cx="40" cy="40" r="30" fill="none" stroke={C.amber} strokeWidth="14" strokeDasharray="38 150" strokeDashoffset="-103" transform="rotate(-90 40 40)"/>
-            <circle cx="40" cy="40" r="30" fill="none" stroke={C.red} strokeWidth="14" strokeDasharray="47 141" strokeDashoffset="-141" transform="rotate(-90 40 40)"/>
-            <text x="40" y="44" textAnchor="middle" fontFamily="Syne,sans-serif" fontWeight="800" fontSize="14" fill={C.text}>87</text>
-          </svg>
-          <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-            {[{color:C.green,label:"Pass",val:54},{color:C.amber,label:"Warn",val:21},{color:C.red,label:"Fail",val:12}].map(({color,label,val})=>(
-              <div key={label} style={{ display:"flex", alignItems:"center", gap:8, fontSize:12 }}>
-                <div style={{ width:8, height:8, borderRadius:"50%", background:color, flexShrink:0 }}/>
-                <div style={{ color:C.muted, flex:1 }}>{label}</div>
-                <div style={{ fontWeight:700, fontSize:13 }}>{val}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div style={{ padding:"32px 20px", textAlign:"center", color:C.muted, fontSize:13 }}>No checks run yet.</div>
       </div>
     </div>
   </div>
@@ -998,7 +967,7 @@ const ArtworkChecker = () => (
         <div key={i} style={{ flex:1 }}>
           <label style={{ display:"block", fontSize:11, fontWeight:600, letterSpacing:"0.8px", textTransform:"uppercase", color:C.muted, marginBottom:6 }}>{label}</label>
           <select style={{ width:"100%", background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:"10px 14px", color:C.text, fontFamily:"'DM Sans',sans-serif", fontSize:13 }}>
-            <option>{["Central Package — APF505","Kellogg's — Brand Guide v4","FL-2024-041 — Snap Kitchen"][i]}</option>
+            <option>{["Select a press spec profile","Select a brand profile","Select a job number"][i]}</option>
           </select>
         </div>
       ))}
@@ -1012,16 +981,9 @@ const ArtworkChecker = () => (
     </div>
     <div style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:18, overflow:"hidden" }}>
       <div style={{ padding:"18px 22px", borderBottom:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:15 }}>Last Check — Snap Kitchen Sleeve Wrap</div>
-        <Badge type="fail">✕ 2 Failed</Badge>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:15 }}>Check Results</div>
       </div>
-      <CheckRow type="pass" name="Line Weights" detail="Minimum 0.25pt · All elements clear" badge="Pass"/>
-      <CheckRow type="fail" name="Text Size" detail="Found 3 elements at 4pt — minimum is 6pt" badge="Fail"/>
-      <CheckRow type="fail" name="Ink Density / TAC" detail="Total area coverage at 292% — spec max 280%" badge="Fail"/>
-      <CheckRow type="pass" name="Bleed & Safe Zone" detail="3mm bleed all sides · Safe zone maintained" badge="Pass"/>
-      <CheckRow type="pass" name="Resolution" detail="All raster elements at 300dpi or above" badge="Pass"/>
-      <CheckRow type="warn" name="Trapping" detail="2 elements with trap values below 0.15pt spec" badge="Warn"/>
-      <CheckRow type="pass" name="Barcode" detail="UPC-A detected · Magnification 100% · Passes" badge="Pass"/>
+      <div style={{ padding:"32px 20px", textAlign:"center", color:C.muted, fontSize:13 }}>No checks run yet — upload an artwork file above to get started.</div>
     </div>
   </div>
 );
@@ -1046,12 +1008,9 @@ const FileComparator = () => (
     </div>
     <div style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:18, overflow:"hidden" }}>
       <div style={{ padding:"18px 22px", borderBottom:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:15 }}>Comparison — Tide Pouch v1 vs v2</div>
-        <Badge type="warn">3 Changes Detected</Badge>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:15 }}>Comparison Results</div>
       </div>
-      <CheckRow type="warn" name="Page 1 — Net Weight Text" detail='Text changed from "32 oz" to "32 fl oz" · Low severity' badge="Low"/>
-      <CheckRow type="fail" name="Page 1 — Logo Color Shift" detail="Tide arc changed from PANTONE 286 to PANTONE 300 · High severity" badge="High"/>
-      <CheckRow type="warn" name="Page 2 — Barcode Position" detail="Barcode shifted 2mm right · Verify clear zone" badge="Medium"/>
+      <div style={{ padding:"32px 20px", textAlign:"center", color:C.muted, fontSize:13 }}>Upload two files above to compare them.</div>
     </div>
   </div>
 );
@@ -1105,7 +1064,7 @@ export default function PressPal() {
             <div style={{ display:"flex", alignItems:"center", gap:12 }}>
               <div style={{ background:C.surface2, border:`1px solid ${C.border}`, borderRadius:20, padding:"6px 14px", fontSize:12, fontWeight:500, color:C.muted, display:"flex", alignItems:"center", gap:6 }}>
                 <div style={{ width:6, height:6, borderRadius:"50%", background:C.lime }}/>
-                Job #FL-2024-041
+                No active job
               </div>
               <button style={{ background:C.lime, color:"#0A0A0F", border:"none", padding:"8px 18px", borderRadius:10, fontFamily:"'DM Sans',sans-serif", fontWeight:600, fontSize:13, cursor:"pointer" }}>+ New Job</button>
             </div>
